@@ -1,3 +1,16 @@
-add_subdirectory(EH)
+if(ARCH STREQUAL "K1C")
+  if(NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "K1COSCLANG")
+    add_subdirectory(EH)
+  endif()
+else()
+  add_subdirectory(EH)
+endif()
+
+file(GLOB Source RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.c *.cpp)
+if(ARCH STREQUAL "K1C")
+  if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "K1COSCLANG")
+    list(REMOVE_ITEM Source global_ctor.cpp fixups.cpp short_circuit_dtor.cpp 2003-06-13-Crasher.cpp 2003-09-29-NonPODsByValue.cpp)
+  endif()
+endif()
 
 llvm_singlesource(PREFIX "Regression-C++-")

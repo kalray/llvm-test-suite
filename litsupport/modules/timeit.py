@@ -96,8 +96,8 @@ def getUserTime(filename):
 def getUserTimeFromContents(contents):
     from_bytes = lambda s: s.decode("utf-8") if type(s) == bytes else s
     lines = [from_bytes(l) for l in contents.splitlines()]
-    line = [line for line in lines if line.startswith('user')]
+    line = [line for line in lines if line.startswith('real')]
     assert len(line) == 1
 
-    m = re.match(r'user\s+([0-9.]+)', line[0])
+    m = re.match(r'real\s+([0-9.]+)', line[0])
     return float(m.group(1))
