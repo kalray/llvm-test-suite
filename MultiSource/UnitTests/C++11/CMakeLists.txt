@@ -1,5 +1,11 @@
 list(APPEND CXXFLAGS -std=c++11)
 
-if(NOT MIPS_IS_MIPS16_ENABLED)
-  add_subdirectory(frame_layout)
+if(ARCH STREQUAL "K1C")
+  if(NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "K1COSCLANG")
+    add_subdirectory(frame_layout)
+  endif()
+else()
+  if(NOT MIPS_IS_MIPS16_ENABLED)
+    add_subdirectory(frame_layout)
+  endif()
 endif()

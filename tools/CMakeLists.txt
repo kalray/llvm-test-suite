@@ -7,7 +7,17 @@
 
 include(Host)
 
-add_executable(fpcmp fpcmp.c)
+if(ARCH STREQUAL "K1C")
+  add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target
+    COMMAND gcc ${CMAKE_CURRENT_SOURCE_DIR}/fpcmp.c -o ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target
+    COMMAND cp ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target ${CMAKE_CURRENT_BINARY_DIR}/fpcmp
+    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/fpcmp.c
+  )
+  add_custom_target(fpcmp DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target)
+else()
+  add_executable(fpcmp fpcmp.c)
+endif()
 
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/HashProgramOutput.sh
