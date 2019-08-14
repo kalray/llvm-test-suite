@@ -1,34 +1,44 @@
 list(APPEND LDFLAGS -lm )
 set(FP_TOLERANCE 0.001)
 set(Source
-  ReedSolomon.c
-  evalloop.c
-  fbench.c
-  ffbench.c
-  flops-1.c
-  flops-2.c
-  flops-3.c
-  flops-4.c
-  flops-5.c
-  flops-6.c
-  flops-7.c
-  flops-8.c
-  flops.c
-  fp-convert.c
-  himenobmtxpa.c
   lowercase.c
-  mandel-2.c
   mandel.c
-  matmul_f64_4x4.c
   oourafft.c
-  perlin.c
-  pi.c
-  revertBits.c
-  richards_benchmark.c
-  salsa20.c
-  whetstone.c
 )
-if(NOT ARCH STREQUAL "PowerPC" OR NOT TARGET_OS STREQUAL "Darwin")
-  list(APPEND Source dt.c)
+if(NOT ARCH STREQUAL "K1C")
+  if(NOT ARCH STREQUAL "PowerPC" OR NOT TARGET_OS STREQUAL "Darwin")
+    list(APPEND Source dt.c)
+  endif()
+  list(APPEND Source
+    revertBits.c # 1500s timeout
+    perlin.c # 1500s timeout
+    flops-4.c # 1500s timeout
+    flops-5.c # 1500s timeout
+    richards_benchmark.c # 1500s timeout
+    evalloop.c # 1500s timeout
+    pi.c # 1500s timeout
+    flops-1.c # 1500s timeout
+    flops-2.c # 1500s timeout
+    flops-7.c # 1500s timeout
+    mandel-2.c # 1500s timeout
+    matmul_f64_4x4.c # 1500s timeout
+    himenobmtxpa.c # 1500s timeout
+    salsa20.c # 1500s timeout
+    flops-3.c # 1500s timeout
+    flops-6.c # 1500s timeout
+    flops.c # 1500s timeout
+    flops-8.c # 1500s timeout
+    whetstone.c # 1500s timeout
+    fp-convert.c # 1500s timeout
+    ffbench.c # 1500s timeout
+    ReedSolomon.c # 1500s timeout
+    fbench.c # 1500s timeout
+)
 endif()
+if(ARCH STREQUAL "K1C")
+  list(REMOVE_ITEM Source
+    mandel.c # error: '__builtin_choose_expr' requires a constant expression
+  )
+endif()
+
 llvm_singlesource()

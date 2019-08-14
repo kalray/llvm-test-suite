@@ -94,8 +94,8 @@ def getUserTime(filename):
 
 
 def getUserTimeFromContents(contents):
-    line = [line for line in contents.splitlines() if line.startswith('real')]
+    line = [line for line in contents.splitlines() if line.startswith('user')]
     assert len(line) == 1
 
-    m = re.match(r'real\s+([0-9.]+)', line[0])
+    m = re.match(r'user\s+([0-9.]+)', line[0])
     return float(m.group(1))

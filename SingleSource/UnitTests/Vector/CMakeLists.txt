@@ -28,4 +28,12 @@ if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
     endif()
   endif()
 endif()
+
+if(ARCH STREQUAL "K1C")
+  file(GLOB Source RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+  list(REMOVE_ITEM Source
+    Vector-build2.cpp # 1500s timeout
+  )
+endif()
+
 llvm_singlesource(PREFIX "Vector-")
