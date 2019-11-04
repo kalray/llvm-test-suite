@@ -1,4 +1,7 @@
 {
-  "repository.callsign": "LLVMTESTSUITE",
-  "phabricator.codereview": "true"
+    "repository.callsign": "LLVMTESTSUITE",
+    "phabricator.codereview": "true",
+    "load": [
+        "clang-format-linter"
+    ]
 }
