@@ -60,6 +60,7 @@ if(ARCH STREQUAL "K1C")
   else()
     list(REMOVE_ITEM Source stmtexpr.cpp AtomicOps.c)
     list(REMOVE_ITEM Source initp1.cpp) #OK in O0
+    list(REMOVE_ITEM Source 2003-05-07-VarArgs.c 2003-08-11-VaListArg.c) # fail since bundling introduction
   endif()
 endif()
 llvm_singlesource()
