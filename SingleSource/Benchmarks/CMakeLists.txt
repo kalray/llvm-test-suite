@@ -10,7 +10,5 @@ add_subdirectory(Misc-C++-EH)
 add_subdirectory(Polybench)
 add_subdirectory(Shootout)
 add_subdirectory(Shootout-C++)
-if(NOT ARCH STREQUAL "K1C")
-  add_subdirectory(SmallPT) # Doesn't build in Debug mode
-endif()
+add_subdirectory(SmallPT)
 add_subdirectory(Stanford)
