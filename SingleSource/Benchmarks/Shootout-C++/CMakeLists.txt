@@ -18,6 +18,7 @@ set(Source
   moments.cpp
   nestedloop.cpp
   objinst.cpp
+  random.cpp
   sieve.cpp
   strcat.cpp
 )
@@ -51,13 +52,6 @@ if(ARCH STREQUAL "K1C")
     hash.cpp # clang-8: error: unable to execute command: Segmentation fault
     lists.cpp # clang-8: error: unable to execute command: Segmentation fault
     moments.cpp # clang-8: error: unable to execute command: Segmentation fault
-    methcall.cpp # Doesn't build in Debug mode
-    objinst.cpp # Doesn't build in Debug mode
-    random.cpp # 1500s timeout
-    matrix.cpp # 1500s timeout
-    fibo.cpp # 1500s timeout
-    heapsort.cpp # 1500s timeout
-    ackermann.cpp # 1500s timeout
   )
 endif()
 llvm_singlesource(PREFIX Shootout-C++-)
