@@ -1,6 +1,6 @@
+add_subdirectory(Benchmarks)
 if(NOT ARCH STREQUAL "K1C")
   add_subdirectory(Applications)
-  add_subdirectory(Benchmarks)
 endif()
 
 if(NOT TEST_SUITE_BENCHMARKING_ONLY)
