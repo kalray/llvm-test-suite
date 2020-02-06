@@ -3,6 +3,7 @@ set(FP_TOLERANCE 0.001)
 set(Source
   Oscar.c
   Quicksort.c
+  RealMM.c
 )
 if(NOT TEST_SUITE_BENCHMARKING_ONLY)
   list(APPEND Source IntMM.c)
@@ -16,7 +17,6 @@ if(NOT ARCH STREQUAL "K1C")
     Puzzle.c # 1500s timeout
     Perm.c # 1500s timeout
     Treesort.c # 1500s timeout
-    RealMM.c # regression from [k1c] Initial load/store packing pre-register allocation pass
   )
 endif()
 llvm_singlesource()
