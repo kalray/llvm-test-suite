@@ -32,7 +32,7 @@ if(NOT ARCH STREQUAL "PowerPC" OR NOT TARGET_OS STREQUAL "Darwin")
   list(APPEND Source dt.c)
 endif()
 
-if(ARCH STREQUAL "K1C")
+if(ARCH STREQUAL "KVX")
   list(REMOVE_ITEM Source
     mandel.c # error: '__builtin_choose_expr' requires a constant expression
   )

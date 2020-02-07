@@ -7,7 +7,7 @@
 
 include(Host)
 
-if(ARCH STREQUAL "K1C")
+if(ARCH STREQUAL "KVX")
   add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target
     COMMAND gcc ${CMAKE_CURRENT_SOURCE_DIR}/fpcmp.c -o ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target

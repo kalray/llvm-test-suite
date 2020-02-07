@@ -1,6 +1,6 @@
 file(COPY lit.local.cfg DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
-if(NOT ARCH STREQUAL "K1C")
+if(NOT ARCH STREQUAL "KVX")
   add_subdirectory(libs)
   add_subdirectory(XRay)
   add_subdirectory(LCALS)

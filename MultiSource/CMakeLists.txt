@@ -1,5 +1,5 @@
 add_subdirectory(Benchmarks)
-if(NOT ARCH STREQUAL "K1C")
+if(NOT ARCH STREQUAL "KVX")
   add_subdirectory(Applications)
 endif()
 

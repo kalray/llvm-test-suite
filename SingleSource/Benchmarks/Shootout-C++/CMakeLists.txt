@@ -37,7 +37,7 @@ if(TARGET_OS STREQUAL "Darwin")
   # Necessary for ackermann on iOS
   list(APPEND LDFLAGS -Xlinker -stack_size -Xlinker 0x800000)
 endif()
-if(ARCH STREQUAL "K1C")
+if(ARCH STREQUAL "KVX")
   list(REMOVE_ITEM Source
     wordfreq.cpp # clang-8: error: unable to execute command: Segmentation fault
     lists1.cpp # clang-8: error: unable to execute command: Segmentation fault
