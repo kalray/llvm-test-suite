@@ -1,5 +1,7 @@
 add_subdirectory(anagram)
 add_subdirectory(bc)
 add_subdirectory(ft)
-add_subdirectory(ks)
+if(NOT "${ARCH}" STREQUAL "K1C")
+  add_subdirectory(ks)
+endif()
 add_subdirectory(yacr2)
