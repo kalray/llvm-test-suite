@@ -53,5 +53,11 @@ if(ARCH STREQUAL "K1C")
     lists.cpp # clang-8: error: unable to execute command: Segmentation fault
     moments.cpp # clang-8: error: unable to execute command: Segmentation fault
   )
+  if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    list(REMOVE_ITEM Source
+      objinst.cpp
+      methcall.cpp
+    )
+  endif()
 endif()
 llvm_singlesource(PREFIX Shootout-C++-)
