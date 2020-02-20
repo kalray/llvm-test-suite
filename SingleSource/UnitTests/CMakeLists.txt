@@ -46,4 +46,9 @@ if(NOT ARCH STREQUAL "x86")
     ms_struct_pack_layout-1.c
   )
 endif()
+if(ARCH STREQUAL "K1C" AND CMAKE_BUILD_TYPE STREQUAL "Debug")
+  list(REMOVE_ITEM Source
+    stmtexpr.cpp
+  )
+endif()
 llvm_singlesource()
