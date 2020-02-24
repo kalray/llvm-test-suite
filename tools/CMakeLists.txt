@@ -7,23 +7,10 @@
 
 include(Host)
 
-if(ARCH STREQUAL "KVX")
-  # FIXME: see else() stmt that has been updated (was previously: add_executable(fpcmp fpcmp.c))
-  # FIXME: adapt add_custom_command consequently
-  add_custom_command(
-    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target
-    COMMAND gcc ${CMAKE_CURRENT_SOURCE_DIR}/fpcmp.c -o ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target
-    COMMAND cp ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target ${CMAKE_CURRENT_BINARY_DIR}/fpcmp
-    DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/fpcmp.c
-  )
-  add_custom_target(fpcmp DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/fpcmp-target)
-else()
-  add_executable(fpcmp-target ${CMAKE_CURRENT_SOURCE_DIR}/fpcmp.c)
-  llvm_codesign(fpcmp-target)
-  add_executable(build-fpcmp-target ALIAS fpcmp-target)
-  llvm_add_host_executable(build-fpcmp fpcmp fpcmp.c)
-endif()
-
+add_executable(fpcmp-target ${CMAKE_CURRENT_SOURCE_DIR}/fpcmp.c)
+llvm_codesign(fpcmp-target)
+add_executable(build-fpcmp-target ALIAS fpcmp-target)
+llvm_add_host_executable(build-fpcmp fpcmp fpcmp.c)
 
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/HashProgramOutput.sh
