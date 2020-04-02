@@ -12,7 +12,7 @@ add_subdirectory(llubenchmark)
 add_subdirectory(nbench)
 add_subdirectory(Rodinia)
 
-if(NOT ARCH STREQUAL "K1C")
+if(NOT ARCH STREQUAL "KVX")
   add_subdirectory(ASCI_Purple) # load-store-packing fail
   add_subdirectory(MallocBench)
   add_subdirectory(MiBench)
@@ -27,7 +27,7 @@ endif()
 if((NOT "${TARGET_OS}" STREQUAL "Darwin") OR (NOT "${ARCH}" STREQUAL "ARM"))
   add_subdirectory(TSVC)
 endif()
-if(NOT ARCH STREQUAL "K1C")
+if(NOT ARCH STREQUAL "KVX")
   add_subdirectory(Prolangs-C++)
   add_subdirectory(Bullet)
   add_subdirectory(tramp3d-v4) # fatal error: error in backend: Cannot select: 0xcb9b070: i32,ch = AtomicLoad<(volatile load monotonic 1 from `i8* bitcast (i64* @_ZGVZN5Pooma23incrementNumExpressionsElE5mutex to i8*)`, align 8)> 0x433c738, 0xcb9b008

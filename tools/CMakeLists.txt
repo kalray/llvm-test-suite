@@ -7,7 +7,7 @@
 
 include(Host)
 
-if(ARCH STREQUAL "K1C")
+if(ARCH STREQUAL "KVX")
   # FIXME: see else() stmt that has been updated (was previously: add_executable(fpcmp fpcmp.c))
   # FIXME: adapt add_custom_command consequently
   add_custom_command(
