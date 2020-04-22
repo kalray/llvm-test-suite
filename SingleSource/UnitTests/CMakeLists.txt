@@ -69,4 +69,9 @@ if(ARCH STREQUAL "KVX" AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     stmtexpr.cpp
   )
 endif()
+if(ARCH STREQUAL "KVX")
+  # FIXME: Re-enable hardware loops for UnitTests. They are disabled
+  # until T12847 is fixed (hwloops fail on LoopBug2.c).
+list(APPEND CFLAGS -mllvm -disable-kvx-hwloops)
+endif()
 llvm_singlesource()
