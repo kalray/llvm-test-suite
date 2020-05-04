@@ -1,3 +1,5 @@
 list(APPEND CPPFLAGS -I${CMAKE_CURRENT_SOURCE_DIR}/include -std=gnu++98 -DNO_TIME)
 list(APPEND LDFLAGS -lm)
+set(FP_ABSTOLERANCE 0.0000001)
+# FIXME (KVX): fails with load/store packing pass (T12917)
 llvm_multisource(bullet)

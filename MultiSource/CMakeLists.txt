@@ -1,8 +1,5 @@
+add_subdirectory(Applications)
 add_subdirectory(Benchmarks)
-if(NOT ARCH STREQUAL "KVX")
-  add_subdirectory(Applications)
-endif()
-
 if(NOT TEST_SUITE_BENCHMARKING_ONLY)
   add_subdirectory(UnitTests)
 endif()

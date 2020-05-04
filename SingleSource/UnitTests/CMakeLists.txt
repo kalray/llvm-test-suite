@@ -1,14 +1,10 @@
 include(CheckCCompilerFlag)
 
-if(NOT ARCH STREQUAL "KVX")
-  add_subdirectory(C++11)
-endif()
+add_subdirectory(C++11)
 add_subdirectory(SignlessTypes)
 add_subdirectory(Threads)
 add_subdirectory(Vector)
-if(NOT ARCH STREQUAL "KVX")
-  add_subdirectory(Vectorizer)
-endif()
+add_subdirectory(Vectorizer)
 # FIXME: Disable SJLJ tests for now, until EH edges are represented.
 # add_subdirectory(SetjmpLongjmp)
 if(TARGET_OS STREQUAL "Darwin")
@@ -64,14 +60,4 @@ else()
   list(REMOVE_ITEM Source matrix-types-spec.cpp)
 endif()
 
-if(ARCH STREQUAL "KVX" AND CMAKE_BUILD_TYPE STREQUAL "Debug")
-  list(REMOVE_ITEM Source
-    stmtexpr.cpp
-  )
-endif()
-if(ARCH STREQUAL "KVX")
-  # FIXME: Re-enable hardware loops for UnitTests. They are disabled
-  # until T12847 is fixed (hwloops fail on LoopBug2.c).
-list(APPEND CFLAGS -mllvm -disable-kvx-hwloops)
-endif()
 llvm_singlesource()
