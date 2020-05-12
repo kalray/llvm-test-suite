@@ -281,6 +281,39 @@ if(ARCH MATCHES "SystemZ")
   list(APPEND TestsToSkip ${SystemZTestsToSkip})
 endif()
 
+# KVX Test Blacklist
+if(ARCH MATCHES "KVX")
+  file(GLOB KVXTestsToSkip CONFIGURE_DEPENDS
+    # error: __builtin_longjmp is not supported for the current target
+    # error: __builtin_setjmp is not supported for the current target
+    pr84521.c
+    built-in-setjmp.c
+    # error in backend: Could not match memory address.  Inline asm failure!
+    pr81588.c
+    pr65053-2.c
+    pr82954.c
+    pr56866.c
+    pr68328.c
+    pr40657.c
+    pr85156.c
+    stkalign.c
+    pr40022.c
+    # error in backend: Unsupported Depth for lowerRETURNADDR
+    20030323-1.c
+    # FIXME: fix in progress, see T13164
+    # error in backend: Cannot select: 0xc1d9a8: i32 = setcc 0xc1d940, ConstantFP:f32<-1.000000e+00>, seteq:ch
+    pr39501.c
+    # unidentified failures (check with Debug build)
+    pr23324.c
+    # UNREACHABLE executed at llvm-project/llvm/lib/Target/KVX/KVXISelLowering.cpp:1183! (debug mode only)
+    pr84524.c
+    # link-time failures
+    pr49218.c # undefined reference to `__fixsfti'
+  )
+
+  list(APPEND TestsToSkip ${KVXTestsToSkip})
+endif()
+
 # Darwin Test Blacklist
 if(TARGET_OS STREQUAL "Darwin")
   file(GLOB DarwinTestsToSkip CONFIGURE_DEPENDS
