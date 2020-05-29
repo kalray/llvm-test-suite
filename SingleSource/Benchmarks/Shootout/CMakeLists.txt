@@ -1,3 +1,6 @@
+if(SMALL_PROBLEM_SIZE)
+  list(APPEND CFLAGS -DSMALL_PROBLEM_SIZE)
+endif()
 list(APPEND LDFLAGS -lm)
 set(Source
   ackermann.c
