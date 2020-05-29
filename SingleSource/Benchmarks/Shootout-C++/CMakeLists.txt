@@ -1,3 +1,6 @@
+if(SMALL_PROBLEM_SIZE)
+  list(APPEND CXXFLAGS -DSMALL_PROBLEM_SIZE)
+endif()
 add_subdirectory(EH)
 
 list(APPEND CXXFLAGS -Wno-deprecated)
