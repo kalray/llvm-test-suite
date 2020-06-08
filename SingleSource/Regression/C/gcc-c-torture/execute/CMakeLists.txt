@@ -300,9 +300,6 @@ if(ARCH MATCHES "KVX")
     pr40022.c
     # error in backend: Unsupported Depth for lowerRETURNADDR
     20030323-1.c
-    # FIXME: fix in progress, see T13164
-    # error in backend: Cannot select: 0xc1d9a8: i32 = setcc 0xc1d940, ConstantFP:f32<-1.000000e+00>, seteq:ch
-    pr39501.c
     # unidentified failures (check with Debug build)
     pr23324.c
     # UNREACHABLE executed at llvm-project/llvm/lib/Target/KVX/KVXISelLowering.cpp:1183! (debug mode only)
