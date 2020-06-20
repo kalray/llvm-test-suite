@@ -343,10 +343,8 @@ if(ARCH MATCHES "KVX")
     pr40022.c
     # error in backend: Unsupported Depth for lowerRETURNADDR
     20030323-1.c
-    # unidentified failures (check with Debug build)
+    # Assertion `NumIRArgs == 1' failed
     pr23324.c
-    # UNREACHABLE executed at llvm-project/llvm/lib/Target/KVX/KVXISelLowering.cpp:1183! (debug mode only)
-    pr84524.c
     # link-time failures
     pr49218.c # undefined reference to `__fixsfti'
   )
