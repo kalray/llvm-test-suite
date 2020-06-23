@@ -283,6 +283,22 @@ endif()
 
 # KVX Test Blacklist
 if(ARCH MATCHES "KVX")
+  separate_arguments(KVX_LDFLAGS UNIX_COMMAND "${CMAKE_EXE_LINKER_FLAGS}")
+  execute_process(COMMAND ${CMAKE_C_COMPILER} ${KVX_LDFLAGS} -print-libgcc-file-name
+                  OUTPUT_VARIABLE KVX_RTLIB
+                  OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+  if(${KVX_RTLIB} MATCHES ".*libclang_rt.builtins-kvx.a$")
+    set(KVX_USE_COMPILER_RT TRUE)
+  else()
+    set(KVX_USE_COMPILER_RT FALSE)
+  endif()
+
+  if(KVX_USE_COMPILER_RT)
+    # compiler-rt's __divsc3 emits call to scalbn which reside in math library.
+    list(APPEND LDFLAGS "-lm")
+  endif()
+
   file(GLOB KVXTestsToSkip CONFIGURE_DEPENDS
     # error: __builtin_longjmp is not supported for the current target
     # error: __builtin_setjmp is not supported for the current target
@@ -303,7 +319,9 @@ if(ARCH MATCHES "KVX")
     # Assertion `NumIRArgs == 1' failed
     pr23324.c
     # link-time failures
-    pr49218.c # undefined reference to `__fixsfti'
+    if(NOT KVX_USE_COMPILER_RT)
+      pr49218.c # undefined reference to `__fixsfti'
+    endif()
   )
 
   list(APPEND TestsToSkip ${KVXTestsToSkip})
