@@ -18,7 +18,6 @@ add_subdirectory(Rodinia)
 # because of software limitations.
 if(NOT ARCH STREQUAL "KVX")
   add_subdirectory(MallocBench) # Doesn't link because of undefined symbols.
-  add_subdirectory(MiBench)     # Include file err.h not found.
   add_subdirectory(Prolangs-C)  # Include file sys/utsname.h not found.
   add_subdirectory(Trimaran)    # Include file sys/socket.h not found.
   add_subdirectory(mediabench)  # Undefined references to utime/fchmod/fchown.
@@ -33,7 +32,9 @@ add_subdirectory(tramp3d-v4)
 if(NOT "${ARCH}" STREQUAL "Hexagon")
   add_subdirectory(DOE-ProxyApps-C++)
   add_subdirectory(DOE-ProxyApps-C)
-  add_subdirectory(MiBench)
+  if(NOT ARCH STREQUAL "KVX")
+    add_subdirectory(MiBench) # Include file err.h not found.
+  endif()
 endif()
 if((NOT "${ARCH}" STREQUAL "XCore") AND (NOT "${ARCH}" STREQUAL "KVX"))
   add_subdirectory(7zip) # FIXME (KVX): requires dirent.h support
