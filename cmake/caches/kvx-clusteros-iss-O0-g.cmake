@@ -12,7 +12,7 @@ string(CONCAT linkerflags
   "-Wl,--defsym=MPPA_COS_THREAD_PER_CORE_LOG2=0"	# Set 1 thread per Core (up to log2(4))
   )
 
-set(CMAKE_EXE_LINKER_FLAGS "${linkerflags}" CACHE STRING "")
+set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${linkerflags}" CACHE STRING "")
 
 set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "")
 
