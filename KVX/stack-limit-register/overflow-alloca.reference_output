@@ -1,0 +1,4 @@
+n=100
+stack overflow detected!
+
+exit 1
