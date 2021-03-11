@@ -1,0 +1,42 @@
+# Modified version of llvm_singlesource() to call llvm_test_executable_no_test2
+# instead of llvm_test_executable_no_test.
+function(llvm_singlesource_abi)
+  cmake_parse_arguments(_LSARG "" "PREFIX" "" ${ARGN})
+  set(sources ${Source})
+  foreach(source ${sources})
+    basename(name ${source})
+    set(_target ${_LSARG_PREFIX}${name})
+    llvm_test_executable_no_test2(${_target} ${source})
+    set_property(TARGET ${_target} PROPERTY TEST_NAME ${name})
+    llvm_test_traditional(${_target})
+    llvm_add_test_for_target(${_target})
+  endforeach()
+endfunction()
+
+# Modified version of llvm_test_executable_no_test to pass the corresponding .S
+# to the link command.
+function(llvm_test_executable_no_test2 target)
+  add_executable(${target} ${ARGN})
+  basename(asmname ${ARGN})
+  append_target_flags(COMPILE_FLAGS ${target} ${CFLAGS})
+  append_target_flags(COMPILE_FLAGS ${target} ${CPPFLAGS})
+  # Note that we cannot use target_link_libraries() here because that one
+  # only interprets inputs starting with '-' as flags.
+  append_target_flags(LINK_LIBRARIES ${target} ${LDFLAGS} ${CMAKE_CURRENT_BINARY_DIR}/${asmname}_asm.S)
+  set(target_path ${CMAKE_CURRENT_BINARY_DIR}/${target})
+  llvm_codesign(${target})
+  set_property(GLOBAL APPEND PROPERTY TEST_SUITE_TARGETS ${target})
+  test_suite_add_build_dependencies(${target})
+endfunction()
+
+
+file(GLOB Source RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.c)
+list(APPEND CFLAGS -W -Wall)
+
+# Copy .S files to builddir.
+foreach(src ${Source})
+  basename(asmfile ${src})
+  file(COPY ${asmfile}_asm.S DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+endforeach()
+
+llvm_singlesource_abi()
