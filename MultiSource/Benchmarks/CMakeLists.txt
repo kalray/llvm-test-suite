@@ -37,7 +37,7 @@ if(NOT "${ARCH}" STREQUAL "Hexagon")
   endif()
 endif()
 if((NOT "${ARCH}" STREQUAL "XCore") AND (NOT "${ARCH}" STREQUAL "KVX"))
-  add_subdirectory(7zip) # FIXME (KVX): requires dirent.h support
+  add_subdirectory(7zip) # FIXME (KVX): requires exception support
   # FIXME (KVX): PAQ8p compiles with exceptions enabled but fails with
   #   Assertion `MRI->getVRegDef(reg) && "Register use before def!"' (paq8p.cpp)
   # See T12919.
